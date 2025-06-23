@@ -26,14 +26,6 @@ fun CiudadesPage(
 ) {
     var textoBusqueda by remember { mutableStateOf("") }
 
-   // val context = LocalContext.current
-  //  val fusedLocationClient = remember {
-  //      LocationServices.getFusedLocationProviderClient(context)
-   // }
-   // val locationPermissionState = rememberPermissionState(
- //       android.Manifest.permission.ACCESS_FINE_LOCATION
-  //  )
-
     LaunchedEffect(Unit) {
         viewModel.manejarIntencion(IntencionCiudades.CargarCiudades)
     }
