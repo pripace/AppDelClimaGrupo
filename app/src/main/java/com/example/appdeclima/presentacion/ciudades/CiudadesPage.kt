@@ -182,6 +182,7 @@ fun CiudadesPage(
 @Preview(showBackground = true)
 @Composable
 fun CiudadesPageView() {
+    var textoBusqueda by remember { mutableStateOf("") }
     val ciudades = listOf(
         com.example.appdeclima.repository.modelos.Ciudad(
             name = "Buenos Aires",
@@ -200,35 +201,76 @@ fun CiudadesPageView() {
             country = "Argentina",
             lat = -24.78,
             lon = -65.41
+        ),
+        com.example.appdeclima.repository.modelos.Ciudad(
+            name = "Rosario",
+            country = "Argentina",
+            lat = -32.95,
+            lon = -60.65
+        ),
+        com.example.appdeclima.repository.modelos.Ciudad(
+            name = "Ushuaia",
+            country = "Argentina",
+            lat = -54.81,
+            lon = -68.31
         )
     )
 
     MaterialTheme {
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            items(ciudades) { ciudad ->
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        Scaffold(
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = { }
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            text = ciudad.nombre,
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = ciudad.pais,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
+                    Icon(
+                        Icons.Default.LocationOn,
+                        contentDescription = "Mi ubicación"
+                    )
+                }
+            }
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(16.dp)
+            ) {
+                OutlinedTextField(
+                    value = textoBusqueda,
+                    onValueChange = { textoBusqueda = it },
+                    label = { Text("Buscar ciudad...") },
+                    placeholder = { Text("Escribí el nombre de una ciudad") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                )
+
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(ciudades) { ciudad ->
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                        ) {
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Text(
+                                    text = ciudad.nombre,
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = ciudad.pais,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
                     }
                 }
             }
         }
     }
 }
+

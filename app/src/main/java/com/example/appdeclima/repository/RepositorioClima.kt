@@ -12,7 +12,7 @@ class RepositorioClima(context: Context) {
     private val repositorioApi = RepositorioApi()
     private val preferenciasRepository = PreferenciasRepository(context)
 
-    private val ciudadesFalsas = listOf(
+    private val ciudadesHardcodeadas = listOf(
         Ciudad("Buenos Aires", "AR", -34.6118, -58.3960),
         Ciudad("Rosario", "AR", -32.9468, -60.6393),
         Ciudad("Córdoba", "AR", -31.4201, -64.1888),
@@ -23,7 +23,7 @@ class RepositorioClima(context: Context) {
     suspend fun obtenerCiudades(): List<Ciudad> {
         return withContext(Dispatchers.IO) {
             preferenciasRepository.limpiarUltimaCiudad()
-            ciudadesFalsas
+            ciudadesHardcodeadas
         }
     }
 
