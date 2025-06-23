@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -171,6 +172,60 @@ fun CiudadesPage(
                                 fontSize = 16.sp
                             )
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CiudadesPageView() {
+    val ciudades = listOf(
+        com.example.appdeclima.repository.modelos.Ciudad(
+            name = "Buenos Aires",
+            country = "Argentina",
+            lat = -34.61,
+            lon = -58.39
+        ),
+        com.example.appdeclima.repository.modelos.Ciudad(
+            name = "Córdoba",
+            country = "Argentina",
+            lat = -31.42,
+            lon = -64.18
+        ),
+        com.example.appdeclima.repository.modelos.Ciudad(
+            name = "Salta",
+            country = "Argentina",
+            lat = -24.78,
+            lon = -65.41
+        )
+    )
+
+    MaterialTheme {
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            items(ciudades) { ciudad ->
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = ciudad.nombre,
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Medium
+                        )
+                        Text(
+                            text = ciudad.pais,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                     }
                 }
             }
