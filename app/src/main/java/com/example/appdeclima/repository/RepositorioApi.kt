@@ -36,7 +36,7 @@ class RepositorioApi {
             parameter("lon", lon)
             parameter("appid", apiKey)
             parameter("units", "metric")
-            parameter("lang", "en")
+            parameter("lang", "es")
         }.body()
     }
 
@@ -55,7 +55,7 @@ class RepositorioApi {
             parameter("lon", lon)
             parameter("appid", apiKey)
             parameter("units", "metric")
-            parameter("lang", "en")
+            parameter("lang", "es")
         }.body()
     }
 }

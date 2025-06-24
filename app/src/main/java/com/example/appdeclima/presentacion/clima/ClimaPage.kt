@@ -23,28 +23,48 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.appdeclima.repository.modelos.Ciudad
 
-fun getEmojiForWeather(description: String): String {
-    val desc = description.lowercase().trim()
+fun getEmojiForWeather(mainCondition: String): String {
+    val condition = mainCondition.lowercase().trim()
 
     return when {
-        desc.contains("clear") -> "☀️"
-        desc.contains("cloud") -> {
+        condition.contains("claro") ||
+                condition.contains("despejado") -> "☀️"
+        condition.contains("nube") ||
+                condition.contains("nuboso") -> {
+
             when {
-                desc.contains("few") -> "⛅"
-                desc.contains("scattered") -> "⛅"
-                desc.contains("broken") || desc.contains("overcast") -> "☁️"
+                condition.contains("algo") ||
+                        condition.contains("pocas") -> "⛅"
+                condition.contains("muy") ||
+                        condition.contains("cubierto") -> "☁️"
                 else -> "☁️"
             }
         }
-        desc.contains("rain") || desc.contains("drizzle") ||
-                desc.contains("shower") -> "🌧️"
-        desc.contains("thunderstorm") -> "⛈️"
-        desc.contains("snow") || desc.contains("sleet") -> "❄️"
-        desc.contains("mist") || desc.contains("fog") ||
-                desc.contains("smoke") || desc.contains("haze") ||
-                desc.contains("dust") || desc.contains("sand") ||
-                desc.contains("ash") -> "🌫️"
-        desc.contains("squall") || desc.contains("tornado") -> "🌪️"
+        condition.contains("lluvia") -> {
+            when {
+                condition.contains("ligera") -> "🌦️"
+                condition.contains("fuerte") ||
+                        condition.contains("intensa") -> "🌧️"
+                else -> "🌧️"
+            }
+        }
+        condition.contains("llovizna") -> "🌦️"
+        condition.contains("nieve") ||
+                condition.contains("nevada") -> {
+            when {
+                condition.contains("ligera") -> "🌨️"
+                condition.contains("fuerte") ||
+                        condition.contains("intensa") -> "❄️"
+                else -> "❄️"
+            }
+        }
+        condition.contains("tormenta") ||
+                condition.contains("trueno") -> "⛈️"
+        condition.contains("niebla") ||
+                condition.contains("neblina") ||
+                condition.contains("bruma") -> "🌫️"
+        condition.contains("tornado") ||
+                condition.contains("ráfaga") -> "🌪️"
         else -> "❔"
     }
 }
