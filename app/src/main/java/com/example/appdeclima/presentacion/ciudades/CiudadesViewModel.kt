@@ -19,7 +19,6 @@ class CiudadesViewModel(application: Application) : AndroidViewModel(application
     fun manejarIntencion(intencion: IntencionCiudades) {
         when (intencion) {
             is IntencionCiudades.CargarCiudades -> cargarCiudades()
-            is IntencionCiudades.SeleccionarCiudad -> seleccionarCiudad(intencion.ciudad)
             is IntencionCiudades.BuscarCiudad -> buscarCiudad(intencion.texto)
             is IntencionCiudades.BuscarPorUbicacion -> buscarPorUbicacion()
         }
@@ -35,10 +34,6 @@ class CiudadesViewModel(application: Application) : AndroidViewModel(application
                 estado = EstadoCiudades.Error("Error al cargar ciudades")
             }
         }
-    }
-
-    private fun seleccionarCiudad(ciudad: com.example.appdeclima.repository.modelos.Ciudad) {
-
     }
 
     private fun buscarCiudad(texto: String) {
